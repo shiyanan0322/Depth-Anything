@@ -15,8 +15,8 @@ if __name__ == '__main__':
     parser.add_argument('-i', '--video-path', type=str)
     parser.add_argument('-o', '--outdir', type=str, default='./vis_video_depth')
     parser.add_argument('-e', '--encoder', type=str, default='vitl', choices=['vits', 'vitb', 'vitl'])
-    parser.add_argument('--pred-only', dest='pred_only', action='store_true', help='only display the prediction')
-    parser.add_argument('--grayscale', dest='grayscale', action='store_true', help='do not apply colorful palette')
+    parser.add_argument('-p', '--predonly', dest='pred_only', action='store_true', help='only display the prediction')
+    parser.add_argument('-g', '--grayscale', dest='grayscale', action='store_true', help='do not apply colorful palette')
  
     args = parser.parse_args()
     
