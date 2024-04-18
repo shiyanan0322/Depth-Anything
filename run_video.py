@@ -15,6 +15,7 @@ if __name__ == '__main__':
     parser.add_argument('-i', '--video-path', type=str)
     parser.add_argument('-o', '--outdir', type=str, default='./vis_video_depth')
     parser.add_argument('-oi', '--outimg', type=str, default=None, help='output depth frames for video')
+    parser.add_argument('-or', '--outraw', type=str, default=None, help='output raw  frames for video')
     parser.add_argument('-e', '--encoder', type=str, default='vitl', choices=['vits', 'vitb', 'vitl'])
     parser.add_argument('-p', '--predonly', dest='pred_only', action='store_true', help='only display the prediction')
     parser.add_argument('-g', '--grayscale', dest='grayscale', action='store_true', help='do not apply colorful palette')
@@ -100,6 +101,9 @@ if __name__ == '__main__':
             if args.pred_only:
                 out.write(depth)
                 if args.outimg is not None:
+                    raw_dir = os.path.join(args.outraw, filename[:filename.rfind('.')])
+                    os.makedirs(raw_dir, exist_ok=True)
+                    cv2.imwrite(os.path.join(raw_dir, "{:05d}.jpg".format(count)), raw_frame)
                     frames_dir = os.path.join(args.outimg, filename[:filename.rfind('.')])
                     os.makedirs(frames_dir, exist_ok=True)
                     cv2.imwrite(os.path.join(frames_dir, "{:05d}.jpg".format(count)), depth)
